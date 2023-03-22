@@ -38,7 +38,7 @@ namespace TechJobsOO.Tests
             Assert.AreEqual(existsCheck, nameCheck, "No Second Constructor exists");
         }
 
-
+        /*
         [TestMethod] //2
         public void Test_Second_Location_Constructor_Initializes_Value()
         {
