@@ -14,6 +14,8 @@ namespace TechJobsOOAutoGraded6
         }
 
         // TODO: Task 2: Add a second constructor to this class that uses the Location() constructor and sets the value of the value field.
+
+        /*  Initialize the value field for a new Location object, we can modify the parameterized constructor of the Location class to call the default constructor and set the Value property. */
         public Location(string value) : this()
         {
             Value = value;
