@@ -1,5 +1,6 @@
 *********************************************************************************************
-HW2 Tech Jobs@* *@
+HW2 Tech Jobs@* *@ This file is a breakdown of the files used in HW3 and how the code in the file works. Specific explainations of the requirements of the HW are included in the files that are to be ammended.
+
 *********************************************************************************************
 TestTasks2.cs
 *********************************************************************************************
@@ -17,6 +18,7 @@ The code also includes some commented-out test methods that are not being run. T
 *********************************************************************************************
 Employer.cs
 *********************************************************************************************
+
 This is a C# code defining a class named "Employer". This class has three members: "Id", "nextId", and "Value". Here's what each member does:
 
 "Id" is a read-only integer property that is initialized when a new instance of the class is created. Its value is set to the value of "nextId" at the time of creation. "nextId" is then incremented by 1 so that the next instance of the class will have a unique "Id" value.
@@ -87,19 +89,21 @@ The "Equals" method overrides the default implementation of object equality and 
 The "GetHashCode" method returns a hash code for the current instance based on its "id" property.
 
 The "ToString" method overrides the default implementation of object string representation and returns the value of the "value" field.
-
+@* *@
 The comment indicates that the fields should be changed to auto-implemented properties. This means that instead of declaring the fields explicitly and then defining a separate property to get or set their values, the properties can be declared using shorthand syntax that combines the declaration and definition of the field and its accessor method into a single line of code. This would make the class definition shorter and more concise, but would not change its behavior.
+
 *********************************************************************************************
 PositionType.cs          TODO: Task 2: Add custom Equals(), 
                                              GetHashCode(), 
                                              and ToString() methods.
 *********************************************************************************************
 This is a class definition for PositionType. It has three members:
-
+@* *@
 The **Id property** is a read-only integer property that gets the unique identifier of the PositionType instance. It is initialized by the constructor with the value of the static nextId variable, which is then incremented for the next instance.
 The **Value property** is a string property that gets or sets the value of the PositionType instance.
 There are two constructors, a default constructor and a parameterized constructor that takes a string value. The **parameterized constructor** sets the Value property and calls the default constructor to initialize the Id property.
 This code also has a TODO task to add custom Equals(), GetHashCode(), and ToString() methods, which can be used to customize the behavior of the PositionType class when used in certain operations such as comparing or hashing. These methods are not yet implemented
+
 *********************************************************************************************
 Job.cs
 TODO: Task 3: Generate Equals() and GetHashCode() methods.
@@ -120,6 +124,19 @@ A default constructor that initializes the Id property with a unique value and i
 A parameterized constructor that sets all the properties of the class and calls the default constructor to initialize the Id property.
 The Equals() method is overridden to compare two Job objects based on their Id property.
 
-The GetHashCode() method is overridden to return a hash code based on the Id property.
-
+The **GetHashCode()** method is overridden to return a hash code based on the Id property.
+@**@
 A custom ToString() method is not yet implemented, but a note is left indicating that it needs to be created to be able to print a job to the console.
+
+*********************************************************************************************
+JobTests.cs
+*********************************************************************************************
+This code defines a unit test class for the Job class in the **TechJobsOOAutoGraded6** project. The JobTests class has four instance variables of the Job class that represent sample job objects. The **[TestClass]** attribute is applied to the **JobTests** class, which indicates that the class contains tests.
+
+The **[Test]** attribute is applied to the **TestSettingJobId method**, which is a unit test method that checks whether the job IDs are correctly set for different job objects. In the **TestSettingJobId** method, four new Job objects are created, and their IDs are compared using the **Assert class** methods. The **Assert.IsFalse(job1Id == job2Id)** line checks whether the IDs of job1 and job2 are not equal. The **Assert.IsFalse(job3Id == job4Id)** line checks whether the IDs of job3 and job4 are not equal. The **Assert.AreEqual(job1Id + 1, job2Id)** line checks whether the ID of job2 is equal to the ID of job1 plus 1. The **Assert.AreEqual(job3Id + 1, job4Id)** line checks whether the ID of job4 is equal to the ID of job3 plus 1.
+@**@
+These tests ensure that the ID field of the Job class is set correctly and that each job object has a unique ID. If any of these tests fail, it indicates a problem with the Job class's constructor or ID field.
+
+*********************************************************************************************
+
+*********************************************************************************************
