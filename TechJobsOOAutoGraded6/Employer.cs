@@ -1,23 +1,23 @@
 ﻿using System;
 namespace TechJobsOOAutoGraded6
 {
-	public class Employer
+	public class Employer: JobField
 	{
-        public int Id { get; }
-        private static int nextId = 1;
-        public string Value { get; set; }
+        //fields
 
-        public Employer()
+
+        //Constructors
+        /*public Employer()
         {
             Id = nextId;
             nextId++;
-        }
+        }*/
 
-        public Employer(string value) : this()
+        public Employer(string value) : base()
         {
             Value = value;
         }
-
+        //custom methods
         public override bool Equals(object obj)
         {
             return obj is Employer employer &&
@@ -26,7 +26,7 @@ namespace TechJobsOOAutoGraded6
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(Id);
+            return HashCode.Combine(base.Id);
         }
 
         public override string ToString()

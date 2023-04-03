@@ -138,5 +138,187 @@ The **[Test]** attribute is applied to the **TestSettingJobId method**, which is
 These tests ensure that the ID field of the Job class is set correctly and that each job object has a unique ID. If any of these tests fail, it indicates a problem with the Job class's constructor or ID field.
 
 *********************************************************************************************
+Tasks5
+TODO: Task 5: Generate custom ToString() method.
+TODO: Task 5: USE TDD TO BUILD THE TOSTRING() METHOD
+*********************************************************************************************
+Behavior 1: 
+When passed a Job object, it should return a string that contains a blank line before and after the job information.
+
+Create Test ToString()"Fail"-----------------------------------COMPLETED
+Create Test 1 ToStringStartsAndEndsWithNewLine "Fail"----------COMPLETED
+Code ToString() to Pass Test 1---------------------------------COMPLETED
+*********************************************************************************************
+Check for output after updating "ToString()"code below
+*********************************************************************************************
+Job job = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+             Console.WriteLine(job.ToString());
+*********************************************************************************************
+Behavior 2: 
+The string should contain a label for each field, followed by the data stored in that field. Each field should be on its own line. There should be a new line between each job listing.
+
+Create Test 2 TestToStringContainsCorrectLabelsAndData---------COMPLETED
+Create Test ToString()"Pass"Test 2-----------------------------COMPLETED
+*********************************************************************************************
+Check for output after updating "ToString()"code below
+*********************************************************************************************
+// create a Job object with an empty employer location
+Job job = new Job("Product tester", new Employer("ACME"), new Location(""), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+*********************************************************************************************
+// get the string representation of the job
+string jobString = job.ToString();
+
+// print the jobString to the console
+Console.WriteLine(jobString);
+*********************************************************************************************
+Behavior 3: 
+If a field is empty, the method should add, “Data not available” after the label
+@*@
+Create Test 3 ToString()TestToStringHandlesEmptyField-------------------------------COMPLETED
+Create Test ToString()"Pass"Test 3--------------------------------------------------COMPLETED
 
 *********************************************************************************************
+JobField.cs
+TODO: Task 6 Create a new class called JobField 
+*********************************************************************************************
+common fields: **Id (int)**
+			   **public string Value:**
+			   **public string Value**
+common constructors: N/A
+custom methods: **GetHashCode():**
+				**ToString():**
+				**Equals(object obj):**
+*********************************************************************************************
+This code defines an abstract class JobField in the TechJobsOOAutoGraded6 namespace. The class has the following members:
+
+**Id:** a read-only integer property that gets the unique identifier for each instance of the JobField class.
+**nextId:** a private static integer field that is used to generate unique identifiers for each instance of the JobField class.
+**Value:** a public string property that gets or sets the value of a JobField instance.
+**JobField():** a parameterless constructor that initializes the Id property with the next available identifier and increments nextId to ensure that the next JobField instance has a unique identifier.
+**JobField(string value):** a constructor that takes a string argument and initializes the Value property with the specified value, while also initializing Id with the next available identifier and incrementing nextId.
+**Equals(object obj):** an override method that compares the current JobField instance with the specified object to determine whether they have the same Id.
+**GetHashCode():** an override method that returns a hash code for the current JobField instance, based on its Id.
+**ToString():** an override method that returns the string value of the Value property.
+JobField is an abstract class, which means that it cannot be instantiated directly. Instead, 
+it provides a base class for other classes to inherit from and define their own specific 
+@*@
+fields and behavior.
+
+*********************************************************************************************
+CoreCompentency.cs
+TODO: Task 2: Change the fields to auto-implemented properties----------------------COMPLETED
+TODO: Task 6 Create a new class called JobField-------------------------------------COMPLETED
+*********************************************************************************************
+fields: 
+**private static int nextId** = 1;
+**public int Id** { get; }
+**public string Value** { get; set; }
+
+constructors:
+**public CoreCompetency()** - default constructor that initializes the Id field with the next available value.
+**public CoreCompetency(string v) : this()** - parameterized constructor that sets the Value field and calls the default constructor to initialize the Id field.
+
+custom methods:
+**public override bool Equals(object obj)** - checks if the given object is equal to the current CoreCompetency object based on the Id field.
+**public override int GetHashCode()** - returns a hash code value based on the Id field.
+**public override string ToString()** - returns a string representation of the Value field.
+*********************************************************************************************
+This code defines a class named CoreCompetency in the TechJobsOOAutoGraded6 namespace. The class inherits from the abstract class JobField.
+
+The class has one constructor that takes a string parameter and passes it to the base class constructor, which sets the Value property of the JobField object to the passed string value.
+@*@
+The class overrides three methods of the base class JobField: Equals, GetHashCode, and ToString. The Equals method returns true if the passed object is a CoreCompetency object and has the same Id as the current object. The GetHashCode method returns a hash code based on the Id property of the object. The ToString method returns the Value property of the object.
+
+*********************************************************************************************
+PositionType.cs
+TODO: Task 2: Add custom Equals(), GetHashCode(), and ToString() methods.-----------COMPLETED
+TODO: Task 6 Create a new class called JobField-------------------------------------COMPLETED
+*********************************************************************************************
+Fields:
+
+**public int Id** An automatically generated unique identifier for each PositionType object
+**public string Value** The name or title of the position type
+
+Constructors:
+
+**public PositionType()**: The default constructor that sets the value of the Id field to the value of nextId at the time of creation and then increments nextId. This constructor does not take any parameters.
+**public PositionType(string value)**: A parameterized constructor that takes a string parameter value, which is used to set the value of the Value field of the instance. It also calls the default constructor PositionType() to initialize the Id field with the next available value.
+
+Custom Methods:
+
+**public override string ToString()**: Overrides the ToString() method of the Object class and returns the value of the Value property of the PositionType object.
+**public override bool Equals(object obj)**: Overrides the Equals() method of the Object class and compares the Id property of the current PositionType object with the Id property of the object passed as parameter. If both Id values are the same and the object passed as parameter is a PositionType object, it returns true; otherwise, it returns false.
+**public override int GetHashCode()**: Overrides the GetHashCode() method of the Object class and returns a hash code based on the Id value of the PositionType object.
+*********************************************************************************************
+This code defines a class called **"PositionType"** which inherits from the **"JobField"** class. **"PositionType"** represents a type of position in a job listing.
+
+The class has a constructor that takes a string value and passes it to the base constructor of **"JobField"**. This sets the **"Value"** property of the **"JobField"** base class to the given value, and assigns a unique integer ID to the **"Id"** property.
+
+The class also overrides three methods from the **"JobField"** base class: **"ToString()"**, **"Equals()"**, and **"GetHashCode()"**. The **"ToString()"** method returns the value of the **"Value"** property as a string. The **"Equals()"** method compares the **"Id"** property of the current instance to that of another instance of **"PositionType"** to determine if they are equal. The **"GetHashCode()"** method returns a unique hash code for the instance based on its **"Id" property.
+
+*********************************************************************************************
+Location.cs
+TODO: Task 2: Add a second constructor to this class that uses ---------------------COMPLETED
+the Location() constructor and sets the value of the value field.
+TODO: Task 6 Create a new class called JobField------------------------------------COMPLETED 
+*********************************************************************************************
+Fields:
+
+**public int Id:** an integer field which represents the unique identifier for a Location object.
+**private static int nextId:** a static integer field which keeps track of the next available identifier for a Location object.
+**public string Value:** a string field which represents the name or description of a Location object.
+
+Constructors:
+
+**public Location():** a default constructor that initializes the Id field with the next available identifier and increments nextId.
+**public Location(string value):** a parameterized constructor that calls the default constructor and sets the Value field with the provided value parameter.
+
+Custom Methods:
+
+**public override bool Equals(object obj):** an overridden method that checks if the passed object is a Location object and if so, compares its Id field to the Id field of the current object to determine if they are equal.
+**public override int GetHashCode():** an overridden method that returns a hash code based on the value of the Id field.
+**public override string ToString():** an overridden method that returns the value of the Value field as a string.
+*********************************************************************************************
+This code defines a class called Location which is a subclass of **JobField**. The JobField class defines common properties and methods for all job fields.
+
+The Location class has one constructor that takes a string value and sets it as the **Value** property inherited from the JobField class using the base constructor. It also overrides the **Equals, GetHashCode, and ToString** methods inherited from the **JobField** class.
+@*@
+The Equals method checks whether the passed object is a Location object and if it has the same Id value as the current object. The GetHashCode method generates a hash code based on the Id value. The **ToString** method returns the **Value** property as a string.
+
+*********************************************************************************************
+Employer.cs
+TODO: Task 2: Add custom Equals(), GetHashCode(), and ToString() methods.-----------COMPLETED
+TODO: Task 6 Create a new class called JobField-------------------------------------COMPLETED
+*********************************************************************************************
+Fields:
+
+**public int Id:** an integer field which represents the unique identifier for an Employer object.
+**nextId:** a static integer field which keeps track of the next available identifier for an Employer object.
+**public string Value:** a string field which represents the name or description of an Employer object.
+
+Constructors:
+
+**public Employer():** a default constructor that initializes the Id field with the next available identifier and increments nextId.
+**public Employer(string value):** a parameterized constructor that calls the default constructor and sets the Value field with the provided value parameter.
+
+Custom Methods:
+
+**public override bool Equals(object obj):** an overridden method that checks if the passed object is an Employer object and if so, compares its Id field to the Id field of the current object to determine if they are equal.
+**public override int GetHashCode():** an overridden method that returns a hash code based on the value of the Id field.
+**public override string ToString():** an overridden method that returns the value of the Value field as a string.
+*********************************************************************************************
+This code defines a class named Employer that extends the abstract class JobField.
+
+The Employer class has a constructor that takes a string parameter and calls the constructor of the JobField class, passing the value of the parameter as an argument.
+
+The Employer class also overrides three methods from the JobField class: Equals(), GetHashCode(), and ToString(). The Equals() method compares two Employer objects to see if they have the same Id. The GetHashCode() method returns a hash code for the Employer object using its Id. The ToString() method returns the Value property of the Employer object.
+
+This class is part of a larger project that is used to create job listings. Employer is one of the fields that can be used to describe a job.
+*********************************************************************************************
+
+
+
+
+
+
+
