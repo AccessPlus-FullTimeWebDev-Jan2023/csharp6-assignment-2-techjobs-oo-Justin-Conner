@@ -3,15 +3,7 @@ namespace TechJobsOOAutoGraded6
 {
 	public class Employer: JobField
 	{
-        //fields
 
-
-        //Constructors
-        /*public Employer()
-        {
-            Id = nextId;
-            nextId++;
-        }*/
 
         public Employer(string value) : base()
         {

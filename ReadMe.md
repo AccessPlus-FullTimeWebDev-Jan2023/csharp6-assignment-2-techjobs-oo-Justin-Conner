@@ -279,6 +279,18 @@ Custom Methods:
 **public override int GetHashCode():** an overridden method that returns a hash code based on the value of the Id field.
 **public override string ToString():** an overridden method that returns the value of the Value field as a string.
 *********************************************************************************************
+**A note specific to the extension of the common custom methods as it relates to jobfield.cs and location.cs the TestTask2/TestMethod 3 and why the public override bool Equals(object obj) method should not be extended in order to pass the test.**
+*********************************************************************************************
+The two methods are both implementations of the Equals method, but they are intended to be used for comparing different classes that have different properties.
+
+The first method is used in the CoreCompetency class to compare CoreCompetency objects based only on their Id field. It checks whether the passed object is a CoreCompetency object and whether its Id field is equal to the Id field of the current CoreCompetency object.
+
+The second method is used in the Location class to compare Location objects based on both their Id and Value fields. It checks whether the passed object is a Location object and whether its Id and Value fields are equal to the Id and Value fields of the current Location object, respectively.
+
+The first method should not be extended to the second because they are implemented for different classes with different properties. While the first method checks for equality based on the Id field only, the second method checks for equality based on both the Id and Value fields. Extending the first method to the second would not provide the correct comparison behavior for Location objects, as it would ignore the Value field in the comparison.
+
+Therefore, it is important to implement the Equals method appropriately for each class, considering the properties that need to be compared for equality.
+*********************************************************************************************
 This code defines a class called Location which is a subclass of **JobField**. The JobField class defines common properties and methods for all job fields.
 
 The Location class has one constructor that takes a string value and sets it as the **Value** property inherited from the JobField class using the base constructor. It also overrides the **Equals, GetHashCode, and ToString** methods inherited from the **JobField** class.
@@ -315,8 +327,28 @@ The Employer class also overrides three methods from the JobField class: Equals(
 
 This class is part of a larger project that is used to create job listings. Employer is one of the fields that can be used to describe a job.
 *********************************************************************************************
+TestTask.cs [TestMethod]  //2 breakdown
+*********************************************************************************************
+This test method is testing the RunProgram() method in the RunTechJobs class to ensure that the ToString() method of the Job class returns a string that starts and ends with a new line. This is a breakdown of what each part of the test method does:
 
-
+TestMethod: 
+This attribute indicates that this method is a unit test and should be run by the testing framework.
+public void Test_TestToString_Starts_And_Ends_With_NewLine(): 
+This is the name of the test method. It is a convention to name test methods in a way that describes what is being tested.
+string text = System.IO.File.ReadAllText("C:\\Users\\ohmlo\\source\\repos\\csharp6-assignment-2-techjobs-oo-Justin-Conner\\TechJobsOO.Tests\\StartsAndEndsWithNewLine.txt").ToString();: 
+This line reads the contents of a text file called "StartsAndEndsWithNewLine.txt" into a string variable called text. The file likely contains the expected output of the RunProgram() method.
+var stringWriter = new StringWriter();: 
+This line creates a new StringWriter object that will be used to capture the output of the RunProgram() method.
+Console.SetOut(stringWriter);: 
+This line redirects the output of the console to the StringWriter object created in the previous line.
+var job = new RunTechJobs();: 
+This line creates a new instance of the RunTechJobs class.
+job.RunProgram();: 
+This line calls the RunProgram() method of the RunTechJobs class, which creates several instances of the Job class and prints their information to the console using the ToString() method.
+var output = stringWriter.ToString();: 
+This line retrieves the captured output from the StringWriter object and stores it in a string variable called output.
+Assert.AreEqual(text, output, "New Line issue");: 
+This line compares the expected output stored in the text variable to the actual output stored in the output variable. If they are not equal, the test will fail with a message indicating a "New Line issue".
 
 
 

@@ -47,15 +47,15 @@ namespace TechJobsOO.Tests
             //id numbers may get a little wonky
 
             //setup
-            string text = File.ReadAllText("C:\\Users\\ohmlo\\source\\repos\\csharp6-assignment-2-techjobs-oo-Justin-Conner\\TechJobsOO.Tests\\StartsAndEndsWithNewLine.txt").ToString();
+            string text =System.IO.File.ReadAllText("C:\\Users\\ohmlo\\source\\repos\\csharp6-assignment-2-techjobs-oo-Justin-Conner\\TechJobsOO.Tests\\StartsAndEndsWithNewLine.txt").ToString();
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
-            var job = new RunTechJobs();
+            RunTechJobs job = new RunTechJobs();
             job.RunProgram();
-            var output = stringWriter.ToString();
+            string output = stringWriter.ToString();
 
             //verify
-            Assert.AreEqual(1, 1, "New Line issue");
+            Assert.AreEqual(text, output, "New Line issue");
         }
 
         //Unit Test 2: TestToStringContainsCorrectLabelsAndData -----------------------
@@ -137,15 +137,15 @@ namespace TechJobsOO.Tests
             //comparing output to a text file.
             //id numbers may get a little wonky
 
-            string text = System.IO.File.ReadAllText("C:\\Users\\ohmlo\\source\\repos\\csharp6-assignment-2-techjobs-oo-Justin-Conner\\TechJobsOO.Tests\\StartsAndEndsWithNewLine.txt").ToString();
+            string text = System.IO.File.ReadAllText("C:\\Users\\ohmlo\\source\\repos\\csharp6-assignment-2-techjobs-oo-Justin-Conner\\TechJobsOO.Tests\\EmptyFieldTest.txt").ToString();
             var stringWriter = new StringWriter();
             Console.SetOut(stringWriter);
             var job = new RunTechJobs();
             job.RunProgram();
             var output = stringWriter.ToString();
 
-            //verify
-            Assert.AreEqual(1, 1, "Empty string handling error");
+            //verify removed "actual:" from Assert.AreEqual
+            Assert.AreEqual(text, output, "Empty string handling error");
         }
         //TODO: Task 5: Remove this line to uncomment the tests
 

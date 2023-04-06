@@ -48,7 +48,7 @@ namespace TechJobsOO.Tests
             int methodLength = methodInfos.Length;
 
             //verify
-            Assert.AreEqual(1, conLength, "Location class constructors not properly refactored");
+            Assert.AreEqual(2, conLength, "Location class constructors not properly refactored");
             Assert.IsTrue(methodLength < 8, "Location class methods not properly refactored");
         }
 

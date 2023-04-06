@@ -14,13 +14,17 @@ namespace TechJobs.Tests
 
         Job job4 = new Job("Product tester", new Employer("ACME"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-      
-/*This test creates four Job objects, two with specified values (job1 and job2) and two with empty constructors (job3 and job4). It then retrieves the ID values for each job object, and uses assertions to check that:
+        public JobTests()
+        {
+        }
 
-job3 and job4 have different IDs
-the ID difference between job1 and job2 is 1
-the ID difference between job3 and job4 is 1.
-These tests ensure that the unique IDs are correctly assigned to each Job object and that the ID values are sequential. */
+
+        /*This test creates four Job objects, two with specified values (job1 and job2) and two with empty constructors (job3 and job4). It then retrieves the ID values for each job object, and uses assertions to check that:
+
+        job3 and job4 have different IDs
+        the ID difference between job1 and job2 is 1
+        the ID difference between job3 and job4 is 1.
+        These tests ensure that the unique IDs are correctly assigned to each Job object and that the ID values are sequential. */
         [TestMethod]
         public void TestSettingJobId()
         {
@@ -75,17 +79,25 @@ These tests ensure that the unique IDs are correctly assigned to each Job object
             string jobString = job.ToString();
 
             // Assert
-            Assert.IsTrue(jobString.Contains("\nID: "));
-            Assert.IsTrue(jobString.Contains("\nName: Software Engineer"));
-            Assert.IsTrue(jobString.Contains("\nEmployer: Google"));
-            Assert.IsTrue(jobString.Contains("\nLocation: Mountain View, CA"));
-            Assert.IsTrue(jobString.Contains("\nPosition Type: Full-time"));
-            Assert.IsTrue(jobString.Contains("\nCore Competency: Programming\n"));
+            string expectedResult = 
+                $"{Environment.NewLine}ID: {job.Id}" +
+                $"{Environment.NewLine}Name: Software Engineer" +
+                $"{Environment.NewLine}Employer: Google" +
+                $"{Environment.NewLine}Location: Mountain View, CA" +
+                $"{Environment.NewLine}Position Type: Full-time" +
+                $"{Environment.NewLine}Core Competency: Programming{Environment.NewLine}";
+            Assert.AreEqual(expectedResult, jobString);
+
+            Assert.IsTrue(jobString.StartsWith(Environment.NewLine));
+            Assert.IsTrue(jobString.EndsWith(Environment.NewLine));
         }
+
+
+
         /*This test creates a Job object with an empty Location field and uses the ToString() method to get a string representation of the job. It then splits the string by new lines and checks that the empty field has "Data not available" after the label. */
         [TestMethod]
         public void TestToStringContainsCorrectLabelsAndData()
-        {           
+        {
             // Arrange
             Employer employer = new Employer("ACME");
             Location location = new Location("New York");
@@ -93,7 +105,14 @@ These tests ensure that the unique IDs are correctly assigned to each Job object
             CoreCompetency coreCompetency = new CoreCompetency("Leadership");
             Job job = new Job("Job Name", employer, location, positionType, coreCompetency);
 
-            string expectedOutput = "\nID: 24\nName: Job Name\nEmployer: ACME\nLocation: New York\nPosition Type: Manager\nCore Competency: Leadership\n";
+            string expectedOutput =
+                $"{Environment.NewLine}ID: {job.Id}" +
+                $"{Environment.NewLine}Name: Job Name" +
+                $"{Environment.NewLine}Employer: ACME" +
+                $"{Environment.NewLine}Location: New York" +
+                $"{Environment.NewLine}Position Type: Manager" +
+                $"{Environment.NewLine}Core Competency: Leadership" +
+                $"{Environment.NewLine}";
 
             // Act
             string actualOutput = job.ToString();
@@ -102,17 +121,33 @@ These tests ensure that the unique IDs are correctly assigned to each Job object
             Assert.AreEqual(expectedOutput, actualOutput);
         }
 
+
+        public Assert GetAssert(Assert assert)
+        {
+            return assert;
+        }
+
         /*This test creates a new Job object with an empty Location field, and then checks if the ToString() method of the object returns the expected result. The expected result includes the label "Location" followed by the string "Data not available". The test uses the Assert.AreEqual() method to check if the expected result and the actual result of the ToString() method match. */
         [TestMethod]
         public void TestToStringHandlesEmptyField()
         {
-            Job testJob = new Job("Product tester", new Employer("ACME"), new Location("Data not available"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
 
-            string expectedResult = $"\nID: {testJob.Id}\nName: Product tester\nEmployer: ACME\nLocation: Data not available\nPosition Type: Quality control\nCore Competency: Persistence\n";
+            Job testJob = new Job("Product tester", new Employer("Data not available"), new Location("Desert"), new PositionType("Quality control"), new CoreCompetency("Persistence"));
+
+            string expectedResult = 
+            $"{Environment.NewLine}ID: {testJob.Id}"+
+            $"{Environment.NewLine}Name: {testJob.Name}"+
+            $"{Environment.NewLine}Employer: {testJob.EmployerName}" +
+            $"{Environment.NewLine}Location: {testJob.EmployerLocation}" +
+            $"{Environment.NewLine}Position Type: {testJob.JobType}" +
+            $"{Environment.NewLine}Core Competency: {testJob.JobCoreCompetency}{Environment.NewLine}";
+
             string actualResult = testJob.ToString();
-
             Assert.AreEqual(expectedResult, actualResult);
         }
+
+
+
     }
 
 

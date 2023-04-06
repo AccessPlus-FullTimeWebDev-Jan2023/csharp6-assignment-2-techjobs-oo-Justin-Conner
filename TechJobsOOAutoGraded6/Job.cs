@@ -16,7 +16,7 @@ namespace TechJobsOOAutoGraded6
         public Location EmployerLocation { get; set; }
         public PositionType JobType { get; set; }
         public CoreCompetency JobCoreCompetency { get; set; }
-        public string? Employerlocation { get; private set; }
+        //public string? Employerlocation { get; private set; }
 
         // TODO: Task 3: Add the two necessary constructors.
         /*This constructor initializes the Id field with a unique value by setting it to the current value of the nextId variable and then increments the nextId variable. This ensures that every Job object created using this constructor will have a unique identifier. */
@@ -54,21 +54,17 @@ namespace TechJobsOOAutoGraded6
         //toString Pass test 1
         public override string ToString()
         {
-            // Check if EmployerLocation is null or empty
-            string locationValue = EmployerLocation == null || string.IsNullOrEmpty(EmployerLocation.Value) ? "Data not available" : EmployerLocation.Value;
-
-            // Check if EmployerName is null or empty
-            string employerValue = EmployerName == null || string.IsNullOrEmpty(EmployerName.Value) ? "Data not available" : EmployerName.Value;
-
-            // Check if JobType is null or empty
-            string jobTypeValue = JobType == null || string.IsNullOrEmpty(JobType.Value) ? "Data not available" : JobType.Value;
-
-            // Check if JobCoreCompetency is null or empty
-            string jobCoreCompetencyValue = JobCoreCompetency == null || string.IsNullOrEmpty(JobCoreCompetency.Value) ? "Data not available" : JobCoreCompetency.Value;
-
-            // Format the string using string interpolation
-            return $"\nID: {Id}\nName: {Name}\nEmployer: {employerValue}\nLocation: {locationValue}\nPosition Type: {jobTypeValue}\nCore Competency: {jobCoreCompetencyValue}\n";
+            string idString = $"ID: {Id}{Environment.NewLine}";
+            string nameString = $"Name: {Name}{Environment.NewLine}";
+            string employerString = $"Employer: {EmployerName}{Environment.NewLine}";
+            string locationString = $"Location: {EmployerLocation}{Environment.NewLine}";
+            string positionTypeString = $"Position Type: {JobType}{Environment.NewLine}";
+            string coreCompetencyString = $"Core Competency: {JobCoreCompetency}{Environment.NewLine}";
+            return $"{Environment.NewLine}{idString}{nameString}{employerString}{locationString}{positionTypeString}{coreCompetencyString}";
         }
+
+
+
 
     }
 }
